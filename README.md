@@ -1,14 +1,19 @@
 # Web de PrintsNCode
 
-Repositorio privado de la web publicada en https://printsncode.com/.
+Repositorio privado de la portada y la página de enlaces de https://printsncode.com/.
 
 - `index.html`: portada.
 - `link/index.html`: página de enlaces.
+- `CNAME`: dominio `printsncode.com`.
 
 El editor público está en https://github.com/PrintsNCode/printsncode-web y el conversor en https://github.com/PrintsNCode/universal-gcode-converter.
 
-## Publicación
+## Publicación con GitHub Pages
 
-Los dos HTML se publican en Cloudflare Pages. El repositorio guarda los archivos de trabajo y su historial en privado; las páginas y los recursos incluidos en los HTML son públicos al publicarse. No se incluyen aquí el editor personal, proyectos JSON privados ni fotografías de origen.
+GitHub Pages debe publicar la rama `main` y la carpeta raíz `/`. El repositorio permanece privado, mientras la web y los recursos enviados al navegador son públicos. Publicar Pages desde un repositorio privado de una cuenta personal requiere un plan de GitHub compatible, como GitHub Pro.
 
-Para actualizar: exporta la portada y la página de enlaces desde el editor, sustituye los HTML respetando estas rutas y guarda los cambios en este repositorio. La publicación inicial se prepara con una carga directa de esos mismos archivos en Cloudflare Pages; guardar un commit no despliega automáticamente una carga directa.
+Cloudflare se utiliza para el DNS: los CNAME del dominio raíz y `www` apuntan a `printsncode.github.io`. Configura el dominio personalizado `printsncode.com` en Pages y activa HTTPS obligatorio cuando GitHub lo permita.
+
+Para actualizar, exporta ambas páginas desde el editor, sustituye los dos HTML respetando estas rutas y guarda los cambios en `main`. Con Pages habilitado, GitHub construye y publica esa rama.
+
+No se incluyen el editor personal, proyectos JSON privados ni fotografías de origen. La privacidad del repositorio no oculta el contenido de las páginas servidas públicamente.
