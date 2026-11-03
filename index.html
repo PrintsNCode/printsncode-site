@@ -421,17 +421,24 @@ button:active{transform:scale(.98)}button:focus-visible,input:focus-visible,sele
     if (target?.closest('.deck-autoplay')) { paused = !paused; renderDeck(); }
   }
   root.addEventListener('click', handleClick);
+  root.addEventListener('dragstart', (event) => {
+    if (event.target.closest('.deck-stage') && !event.target.closest('video')) event.preventDefault();
+  });
   root.addEventListener('pointerdown', (event) => {
-    if (event.target.closest('video') || !event.target.closest('.deck-stage')) return;
+    if (event.button !== 0 || event.isPrimary === false || event.target.closest('video') || !event.target.closest('.deck-stage')) return;
     pointerX = event.clientX;
     dragOccurred = false;
-    event.target.closest('.deck-stage').setPointerCapture?.(event.pointerId);
+
   });
   root.addEventListener('pointermove', (event) => {
     if (pointerX === null) return;
     const start = pointerX;
     const delta = event.clientX - start;
-    if (Math.abs(delta) > 4) dragOccurred = true;
+    if (Math.abs(delta) > 4) {
+      dragOccurred = true;
+      const stage = event.target.closest('.deck-stage');
+      if (stage && !stage.hasPointerCapture?.(event.pointerId)) stage.setPointerCapture?.(event.pointerId);
+    }
     const front = root.querySelector('.project-card--front');
     if (front) front.style.setProperty('--drag-x', String(delta) + 'px');
     pointerX = start;
